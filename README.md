@@ -9,10 +9,7 @@ then run `:PlugInstall` to install all the necessary plugins
 
 some `coc` extensions also need to be installed
 ```
-:CocInstall coc-python
-:CocInstall coc-clangd
-:CocInstall coc-java
-:CocInstall coc-discord-rpc
+:CocInstall coc-python coc-clangd coc-discord-rpc coc-java coc-tsserver coc-eslint coc-json coc-prettier coc-css
 
 ```
 
