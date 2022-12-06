@@ -42,6 +42,7 @@ let g:python3_host_prog="/usr/bin/python3"
 let g:coc_disable_startup_warning = 1
 let g:NERDTreeDirArrowExpandable="+"
 let g:NERDTreeDirArrowCollapsible="~"
+let g:NERDTreeWinPos = "right"
 
 let g:rainbow_active = 1
 
