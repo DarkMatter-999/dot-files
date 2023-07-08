@@ -8,7 +8,6 @@
 :set softtabstop=4
 :set mouse=a
 
-
 call plug#begin()
 
 Plug 'tpope/vim-surround' " Surrounding ysw)
@@ -21,10 +20,14 @@ Plug 'ryanoasis/vim-devicons' " Developer Icons
 Plug 'tc50cal/vim-terminal' " Vim Terminal
 Plug 'terryma/vim-multiple-cursors' " CTRL + N for multiple cursors
 Plug 'https://github.com/preservim/tagbar' " Tagbar for code navigation
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'jiangmiao/auto-pairs'
-Plug 'luochen1990/rainbow'
-Plug 'vim-autoformat/vim-autoformat'
+Plug 'neoclide/coc.nvim', {'branch': 'release'} " NodeJS extension support
+Plug 'jiangmiao/auto-pairs' " Automatically add Closing Bracket 
+Plug 'luochen1990/rainbow'  " Colored Bracket pairs
+Plug 'vim-autoformat/vim-autoformat' " 
+Plug 'lewis6991/gitsigns.nvim' " Add markers for change
+Plug 'lukas-reineke/indent-blankline.nvim' " Show tabs, spaces and new lines
+Plug 'nvim-lua/plenary.nvim' " telescope dependency
+Plug 'nvim-telescope/telescope.nvim' " fuzzy searcher
 
 call plug#end()
 
@@ -36,7 +39,10 @@ nnoremap <C-f> :NERDTreeFocus
 nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-d> :term<CR>i
-
+nnoremap <C-y> :tabe<CR>:NERDTreeFocus<CR> 
+nnoremap <C-w> :w<CR>
+nnoremap <C-q> :q<CR>
+nnoremap <C-m> :mksession ./session.vim<CR>
 
 let g:python3_host_prog="/usr/bin/python3"
 let g:coc_disable_startup_warning = 1
@@ -62,4 +68,36 @@ inoremap <silent><expr> <Tab>
 
 inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
 
+" Set Theme and Color Scheme
+set background=dark
+colorscheme sonokai
 
+" air-line
+let g:airline_powerline_fonts = 1
+
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+
+" unicode symbols
+let g:airline_left_sep = '»'
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '«'
+let g:airline_right_sep = '◀'
+let g:airline_symbols.linenr = '␊'
+let g:airline_symbols.linenr = '␤'
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.paste = 'Þ'
+let g:airline_symbols.paste = '∥'
+let g:airline_symbols.whitespace = 'Ξ'
+
+" airline symbols
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = ''
