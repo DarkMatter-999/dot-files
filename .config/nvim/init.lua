@@ -510,5 +510,22 @@ vim.cmd([[
     augroup END
 ]])
 
+function compileLatex()
+    vim.cmd("w")                                        -- Save the current file
+    local current_file = vim.fn.expand("%:p")           -- Get the full path of the current file
+    local pdf_filename = vim.fn.expand("%:r") .. ".pdf" -- Generate the PDF filename
+    local compile_command = "pdflatex -output-directory=" ..
+        vim.fn.expand("%:p:h") .. " " .. current_file .. " > /dev/null 2>&1"
+    os.execute(compile_command) -- Run pdflatex
+end
+
+-- Set up an autocommand for the InsertLeave event on *.tex files
+vim.cmd([[
+    augroup AutoCompileLatex
+        autocmd!
+        autocmd InsertLeave *.tex lua compileLatex()
+    augroup END
+]])
+
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
