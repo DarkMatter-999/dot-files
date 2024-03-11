@@ -149,25 +149,21 @@ require('lazy').setup({
     },
     {
         -- Add indentation guides even on blank lines
-        'lukas-reineke/indent-blankline.nvim',
-        -- Enable `lukas-reineke/indent-blankline.nvim`
-        -- See `:help indent_blankline.txt`
+        "lukas-reineke/indent-blankline.nvim",
+        main = "ibl",
         opts = {
-            char = '┊',
-            show_trailing_blankline_indent = false,
-        },
-    },
-    {
-        "numToStr/FTerm.nvim",
-        opts = {
-            dimensions = {
-                height = 1.0, -- Height of the terminal window
-                width = 0.5,  -- Width of the terminal window
-                x = 1,        -- X axis of the terminal window
-                y = 0.5,      -- Y axis of the terminal window
-            }
         }
-    },
+    }, {
+    "numToStr/FTerm.nvim",
+    opts = {
+        dimensions = {
+            height = 1.0, -- Height of the terminal window
+            width = 0.5,  -- Width of the terminal window
+            x = 1,        -- X axis of the terminal window
+            y = 0.5,      -- Y axis of the terminal window
+        }
+    }
+},
 
     -- "gc" to comment visual regions/lines
     { 'numToStr/Comment.nvim',         opts = {} },
@@ -183,7 +179,25 @@ require('lazy').setup({
         },
         build = ':TSUpdate',
     },
-
+    { 'andweeb/presence.nvim' },
+    {
+        'ggandor/leap.nvim',
+        enabled = true,
+        keys = {
+            { "s",  mode = { "n", "x", "o" }, desc = "Leap forward to" },
+            { "S",  mode = { "n", "x", "o" }, desc = "Leap backward to" },
+            { "gs", mode = { "n", "x", "o" }, desc = "Leap from windows" },
+        },
+        config = function(_, opts)
+            local leap = require("leap")
+            for k, v in pairs(opts) do
+                leap.opts[k] = v
+            end
+            leap.add_default_mappings(true)
+            vim.keymap.del({ "x", "o" }, "x")
+            vim.keymap.del({ "x", "o" }, "X")
+        end,
+    },
     -- require 'kickstart.plugins.autoformat',
     -- require 'kickstart.plugins.debug',
 
@@ -501,14 +515,6 @@ cmp.setup {
         { name = 'luasnip' },
     },
 }
-
--- Enable format on save for specific filetypes (e.g., TypeScript, Lua)
-vim.cmd([[
-    augroup FormatOnSave
-        autocmd!
-        autocmd BufWritePre * Format
-    augroup END
-]])
 
 function compileLatex()
     vim.cmd("w")                                        -- Save the current file
